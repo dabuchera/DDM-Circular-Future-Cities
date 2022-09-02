@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide spinner buttons on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.map-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.mapboxgl-marker.mapboxgl-marker-anchor-center {
+  cursor: help;
+}
+
+#movableDiv {
+  position: absolute;
+  z-index: 9;
+  text-align: center;
+}
+
+#divHeader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196f3;
+  color: #fff;
+}
+
+#test {
+  transition: opacity 1s linear;
+}

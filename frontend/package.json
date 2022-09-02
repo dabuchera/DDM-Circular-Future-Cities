@@ -1,0 +1,43 @@
+{
+  "name": "next-typescript-2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next eslint ."
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
+    "@stacks/blockchain-api-client": "^4.1.2",
+    "@stacks/connect": "^6.10.0",
+    "@stacks/rpc-client": "^0.8.18",
+    "@tailwindcss/forms": "^0.5.2",
+    "@types/mapbox-gl": "^2.7.5",
+    "flowbite-react": "^0.1.10",
+    "mapbox-gl": "^2.10.0",
+    "next": "12.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hot-toast": "^2.3.0",
+    "react-router-dom": "^6.3.0",
+    "tailwind-merge": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.47",
+    "@types/react": "18.0.15",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "autoprefixer": "^10.4.8",
+    "eslint": "8.21.0",
+    "eslint-config-next": "12.2.3",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "postcss": "^8.4.16",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
+    "typescript": "4.7.4"
+  }
+}
