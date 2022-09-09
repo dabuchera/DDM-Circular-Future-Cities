@@ -7,12 +7,15 @@ import PageHeading from '../components/PageHeading'
 import InfoPanel from '../components/InfoPanel'
 import { useMarkersContext } from '../providers/MarkersProvider'
 import QueryPanel from '../components/QueryPanel'
+import { IAssets } from '../lib/fetchKG'
 
 export default function Map() {
   //   const [loading, setLoading] = useState(true)
   const [map, setMap] = useState<mapboxgl.Map>()
   //   const handleMapLoading = () => setLoading(false)
   const { markers } = useMarkersContext()
+
+  const [assets, setAssets] = useState<IAssets[]>()
 
   const [visibilityInfoPanel, setVisibilityInfoPanel] = useState(true)
   const [visibilityQueryPanel, setVisibilityQueryPanel] = useState(true)
@@ -87,6 +90,7 @@ export default function Map() {
             </svg>
           </IconButton>
         </div>
+        {/* Info Panel */}
         <div className="flex flex-col absolute top-[25%] right-[1%] z-10">
           <div
             id="infoPanel"
@@ -106,9 +110,22 @@ export default function Map() {
             </div>
             <InfoPanel />
           </div>
-          <div>02</div>
+          <div>
+            {assets ? (
+              <ul>
+                {assets.map((asset) => (
+                  <li key={asset.id}>
+                    {asset.demolitionDate.toDateString} ... {asset.lngLat}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ul>fsdfsdf</ul>
+            )}
+          </div>
           <div>03</div>
         </div>
+        {/* Query Panel */}
         <div className="flex flex-col absolute top-[20%] left-[10%] z-10">
           <div
             id="queryPanel"
@@ -126,7 +143,7 @@ export default function Map() {
                 </svg>
               </IconButton>
             </div>
-            <QueryPanel />
+            <QueryPanel setAssets={setAssets} />
           </div>
           <div>02</div>
           <div>03</div>

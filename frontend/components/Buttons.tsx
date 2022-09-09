@@ -11,7 +11,7 @@ export function StandardButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
        text-white laptop:text-sm tablet:text-base mobile:text-xxs font-medium
        bg-blue-500 
        border border-white rounded-md shadow-sm
-       hover:bg-white hover:text-blue-500 
+       hover:bg-white hover:text-blue-500 hover:border-blue-500
        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
        disabled:opacity-50 disabled:pointer-events-none"
     >
