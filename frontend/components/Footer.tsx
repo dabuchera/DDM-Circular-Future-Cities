@@ -8,7 +8,7 @@ export default function Footer() {
         <a href="/" className="mb-4 flex items-center mobile:mb-0">
           <Image src="/assets/ddm.png" alt="Flowbite Logo" width={50} height={50} />
           <span className="self-center ml-3 whitespace-nowrap laptop:text-xl tablet:text-lg mobile:text-xs text-white font-semibold">
-            DDM@STX
+            DDM
           </span>
         </a>
         <ul className="mb-4 flex flex-wrap items-center text-sm text-white mobile:mb-0">

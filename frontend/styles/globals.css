@@ -27,6 +27,15 @@ input[type='number'] {
   cursor: help;
 }
 
+.mapboxgl-popup-content {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #3b82f6 !important;
+}
+
 #movableDiv {
   position: absolute;
   z-index: 9;
@@ -41,6 +50,7 @@ input[type='number'] {
   color: #fff;
 }
 
-#test {
-  transition: opacity 1s linear;
+#infoPanel,
+#queryPanel {
+  transition: opacity 0.5s linear;
 }

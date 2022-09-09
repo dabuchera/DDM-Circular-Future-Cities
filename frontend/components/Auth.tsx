@@ -1,5 +1,5 @@
 import { showConnect } from '@stacks/connect'
-import { StandardButton } from './Buttons'
+import { IconButton, StandardButton } from './Buttons'
 import { appDetails } from '../lib/constants'
 import truncateMiddle from '../lib/truncate'
 import { useAuthContext } from '../providers/StacksAuthProvider'
@@ -27,9 +27,7 @@ export default function Auth() {
         <StandardButton type="button" onClick={logUserOut}>
           Log Out
         </StandardButton>
-        <div className="text-white mr-2 laptop:text-sm tablet:text-xs mobile:text-xxs inline-flex items-center">
-          {truncateMiddle(address)}
-        </div>
+        <IconButton> {truncateMiddle(address)}</IconButton>
       </div>
     )
   } else {
@@ -38,9 +36,7 @@ export default function Auth() {
         <StandardButton type="button" onClick={handleLogIn}>
           Connect Wallet
         </StandardButton>
-        <div className="text-white mr-2 laptop:text-sm tablet:text-xs mobile:text-xxs inline-flex items-center">
-          Running @Testnet
-        </div>
+        <IconButton>Running @Testnet</IconButton>
       </div>
     )
   }

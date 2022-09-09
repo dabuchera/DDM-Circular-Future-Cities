@@ -1,7 +1,7 @@
 import { AuthOptions } from '@stacks/connect'
 
 export const appDetails: AuthOptions['appDetails'] = {
-  name: 'DAS @ STX',
+  name: 'FCL Data Marketplace',
   icon: 'https://polybox.ethz.ch/index.php/s/jIqszlfq7pMfl4m/download',
 }
 

@@ -66,9 +66,9 @@ export default function MapboxMap({ initialOptions = {}, children, onCreated, on
       )
     })
 
-    mapboxMap.on('click', (e) => {
-      console.log(e)
-    })
+    // mapboxMap.on('click', (e) => {
+    //   console.log(e)
+    // })
 
     setMap(mapboxMap)
     if (onCreated) onCreated(mapboxMap)

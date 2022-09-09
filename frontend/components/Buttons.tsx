@@ -26,7 +26,7 @@ export function IconButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       {...rest}
-      className="mt-5 laptop:px-3 laptop:py-2 tablet:px-1 tablet:py-1 mobile:px-2 mobile:py-1 
+      className="laptop:px-3 laptop:py-2 tablet:px-1 tablet:py-1 mobile:px-2 mobile:py-1 
        text-blue-500 laptop:text-sm tablet:text-base mobile:text-xxs font-medium
        border border-blue-500 rounded-md shadow-sm
        hover:bg-blue-500 hover:text-white"

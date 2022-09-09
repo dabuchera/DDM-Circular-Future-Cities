@@ -16,6 +16,7 @@
     "@stacks/rpc-client": "^0.8.18",
     "@tailwindcss/forms": "^0.5.2",
     "@types/mapbox-gl": "^2.7.5",
+    "@types/sparql-http-client": "^2.2.8",
     "flowbite-react": "^0.1.10",
     "mapbox-gl": "^2.10.0",
     "next": "12.2.3",
@@ -23,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.3.0",
     "react-router-dom": "^6.3.0",
+    "sparql-http-client": "^2.4.1",
     "tailwind-merge": "^1.6.0"
   },
   "devDependencies": {
