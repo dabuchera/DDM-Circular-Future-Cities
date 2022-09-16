@@ -67,7 +67,10 @@ export default function MapboxMap({ initialOptions = {}, children, onCreated, on
     })
 
     // mapboxMap.on('click', (e) => {
-    //   console.log(e)
+    //   // console.log(e)
+    //   // const cursor = e.target.getCanvas().style.cursor
+    //   // console.log(cursor)
+    //   // onMapClick()
     // })
 
     setMap(mapboxMap)

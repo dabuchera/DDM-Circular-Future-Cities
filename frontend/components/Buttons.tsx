@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge'
 export function StandardButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
   const { children, ...rest } = props
 
+  // focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
   return (
     <button
       {...rest}
@@ -12,7 +13,6 @@ export function StandardButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
        bg-blue-500 
        border border-white rounded-md shadow-sm
        hover:bg-white hover:text-blue-500 hover:border-blue-500
-       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
        disabled:opacity-50 disabled:pointer-events-none"
     >
       {props.children}

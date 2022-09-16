@@ -37,7 +37,7 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href="mailto:dcrypb@hotmail.com" className="hover:underline laptop:text-base tablet:text-sm mobile:text-xs">
+            <a href="#" className="hover:underline laptop:text-base tablet:text-sm mobile:text-xs">
               Contact
             </a>
           </li>
