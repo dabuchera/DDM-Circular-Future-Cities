@@ -1,104 +1,144 @@
+import { ChangeEvent, FormEvent, LegacyRef, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import { IAssets } from '../lib/fetchKG'
 
 interface SubmitPanelProps {
   assets: IAssets[] | undefined
 }
 
+interface IFormInputs {
+  name: string
+  demolitionDate: Date
+}
+
 export default function SubmitPanel({ assets }: SubmitPanelProps) {
+  const formElement = useRef<HTMLFormElement>(null)
+
+  const [inputValues, setInputValues] = useState<IFormInputs>({
+    name: '',
+    demolitionDate: new Date(),
+  })
+
   let newestID = null
   if (assets) {
     newestID = assets[assets.length - 1].id + 1
   }
 
-  console.log(newestID)
+  // if (formElement) {
+  //   formElement.current?.addEventListener('submit', (event) => {
+  //     event.preventDefault()
+  //     console.log('event')
+  //     console.log(inputValues)
+  //   })
+  // }
+
+  const test = () => {
+    // console.log(inputValues)
+    console.log(inputValues.demolitionDate.toISOString().slice(0, 10))
+  }
+
+  const handleSubmit = (event: FormEvent) => {
+    console.log('submit')
+    event.preventDefault()
+    console.log(inputValues)
+  }
 
   return (
     <div className="px-6 py-4">
-      <form className="w-full max-w-lg">
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-              First Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-first-name"
-              type="text"
-              placeholder="Jane"
-            />
-            <p className="text-red-500 text-xs italic">Please fill out this field.</p>
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
-              Last Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-last-name"
-              type="text"
-              placeholder="Doe"
-            />
-          </div>
+      <div className="font-bold text-xl mb-2">Input Asset Info</div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mb-6 mt-6">Asset ID: {newestID}</div>
+        <div className="form-group mb-6">
+          <label htmlFor="name" className="form-label inline-block mb-2 text-gray-700">
+            Asset Name
+          </label>
+          <input
+            type="text"
+            required
+            className="form-control
+                        block   
+                        w-full     
+                        px-3  
+                        py-1.5   
+                        text-base   
+                        font-normal    
+                      text-gray-700     
+                      bg-white bg-clip-padding   
+                        border border-solid
+                      border-gray-300   
+                        rounded  
+                        transition 
+                        ease-in-out   
+                        m-0    
+                      focus:text-gray-700
+                      focus:bg-white
+                      focus:border-blue-600 
+                        focus:outline-none"
+            id="name"
+            placeholder="Enter Name"
+            value={inputValues.name}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setInputValues((inputValues) => ({ ...inputValues, name: event.target.value }))
+            }
+          />{' '}
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-              Password
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-password"
-              type="password"
-              placeholder="******************"
-            />
-            <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-          </div>
+        <div className="form-group mb-6">
+          <label htmlFor="demolitionDate" className="form-label inline-block mb-2 text-gray-700">
+            Demolition Date
+          </label>
+          <input
+            type="date"
+            required
+            className="form-control block
+                        w-full
+                        px-3
+                        py-1.5
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                      focus:text-gray-700 
+                      focus:bg-white 
+                      focus:border-blue-600 
+                        focus:outline-none"
+            id="demolitionDate"
+            placeholder="Enter Date"
+            value={inputValues.demolitionDate ? inputValues.demolitionDate.toISOString().slice(0, 10) : undefined}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setInputValues((inputValues) => ({ ...inputValues, demolitionDate: new Date(event.target.value) }))
+            }}
+          />
         </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
-              City
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-city"
-              type="text"
-              placeholder="Albuquerque"
-            />
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-state">
-              State
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>New Mexico</option>
-                <option>Missouri</option>
-                <option>Texas</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
-              Zip
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-zip"
-              type="text"
-              placeholder="90210"
-            />
-          </div>
-        </div>
+        <button
+          type="submit"
+          className="w-full
+                      px-6
+                      py-2.5
+                      bg-blue-600
+                      text-white
+                      font-medium
+                      text-xs
+                      leading-tight
+                      uppercase
+                      rounded
+                      shadow-md
+                      hover:bg-blue-700 hover:shadow-lg
+                      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+                      active:bg-blue-800 active:shadow-lg
+                      transition
+                      duration-150
+                      ease-in-out"
+        >
+          Upload
+        </button>
       </form>
+      <button onClick={test} className="w-20 h-10 mt-5 bg-gray-500">
+        Test
+      </button>
     </div>
   )
 }

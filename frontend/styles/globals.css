@@ -51,6 +51,7 @@ input[type='number'] {
 }
 
 #infoPanel,
-#queryPanel {
+#queryPanel,
+#submitPanel {
   transition: opacity 0.5s linear;
 }

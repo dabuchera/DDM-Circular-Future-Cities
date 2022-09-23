@@ -5,6 +5,7 @@ export interface IAssets {
   id: number
   lngLat: LngLatLike
   demolitionDate: Date
+  sumSteel: number
 }
 
 // Maybe change to async
@@ -62,9 +63,9 @@ export function fetchTest(): IAssets[] {
   //   })
 
   const temp: IAssets[] = [
-    { id: 1, lngLat: [8.548217, 47.376467], demolitionDate: new Date('01.01.2025') },
-    { id: 2, lngLat: [8.541756206305406, 47.3722854812575], demolitionDate: new Date('01.01.2026') },
-    { id: 3, lngLat: [8.543099, 47.366777], demolitionDate: new Date('01.01.2026') },
+    { id: 1, lngLat: [8.548217, 47.376467], demolitionDate: new Date('01.01.2025'), sumSteel: 150 },
+    { id: 2, lngLat: [8.541756206305406, 47.3722854812575], demolitionDate: new Date('01.01.2026'), sumSteel: 0 },
+    { id: 3, lngLat: [8.543099, 47.366777], demolitionDate: new Date('01.01.2026'), sumSteel: 150 },
   ]
 
   return temp
