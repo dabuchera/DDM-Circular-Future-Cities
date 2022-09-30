@@ -40,19 +40,14 @@ export default function Map() {
     }
   }, [visibilityInfoPanel])
 
-  const fetchAssetsData = async (): Promise<IAssets[]> => {
-    const assetsReturn = fetchTest()
-    console.log(assetsReturn)
-    setAssets(assetsReturn)
-    return assetsReturn
-  }
-
   // fetch all Markers from somewhere
   // for now hardcoding
   useEffect(() => {
     console.log('useEffect Map.tsx')
     if (map) {
-      fetchAssetsData().then((assetsReturn) => {
+      fetchTest().then((assetsReturn) => {
+        console.log(assetsReturn)
+        setAssets(assetsReturn)
         const tempMarkers: Markers[] = []
         assetsReturn.forEach((assetsReturnItem) => {
           const marker = new Marker({ color: '#3B82F6' })

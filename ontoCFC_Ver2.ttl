@@ -1,0 +1,468 @@
+@prefix : <http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#> .
+@prefix bot: <https://w3id.org/bot#> .
+@prefix omg: <https://w3id.org/omg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dicm: <https://w3id.org/digitalconstruction/0.5/Materials#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@base <http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC> .
+
+<http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC> rdf:type owl:Ontology ;
+                                                                 owl:imports <http://topbraid.org/schema/> ,
+                                                                             <https://w3id.org/bot-0.3.2> ,
+                                                                             <https://w3id.org/digitalconstruction/0.5/Entities> ,
+                                                                             <https://w3id.org/digitalconstruction/0.5/Materials> ,
+                                                                             <https://w3id.org/omg/0-3> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://schema.org/latitude
+schema:latitude rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/longitude
+schema:longitude rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/streetAddress
+schema:streetAddress rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasAddress
+:hasAddress rdf:type owl:ObjectProperty ;
+            rdfs:domain :CFC_Building ;
+            rdfs:range schema:PostalAddress .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasGeoCoordinates
+:hasGeoCoordinates rdf:type owl:ObjectProperty ;
+                   rdfs:domain :CFC_Building ;
+                   rdfs:range schema:GeoCoordinates .
+
+
+###  https://w3id.org/digitalconstruction/0.5/Materials#hasMaterial
+dicm:hasMaterial rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :CFC_Building
+                                             :CFC_BuildingElement
+                                           )
+                             ] .
+
+
+###  https://w3id.org/omg#hasGeometry
+omg:hasGeometry rdfs:domain :CFC_BuildingElement .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasBuildingID
+:hasBuildingID rdf:type owl:DatatypeProperty ;
+               rdfs:domain :CFC_Building ;
+               rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasConstructionDate
+:hasConstructionDate rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain bot:Building ;
+                     rdfs:range xsd:date .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasDemolitionDate
+:hasDemolitionDate rdf:type owl:DatatypeProperty ;
+                   rdfs:domain bot:Building ;
+                   rdfs:range xsd:date .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasExpiryDate
+:hasExpiryDate rdf:type owl:DatatypeProperty ;
+               rdfs:domain :CFC_BuildingElement ;
+               rdfs:range xsd:date .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#hasManufatureDate
+:hasManufatureDate rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CFC_BuildingElement ;
+                   rdfs:range xsd:date .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#isPublic
+:isPublic rdf:type owl:DatatypeProperty ;
+          rdfs:domain bot:Element ,
+                      bot:Interface ,
+                      bot:Zone ;
+          rdfs:range xsd:boolean .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.org/GeoCoordinates
+schema:GeoCoordinates rdf:type owl:Class .
+
+
+###  http://schema.org/PostalAddress
+schema:PostalAddress rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#CFC_Building
+:CFC_Building rdf:type owl:Class ;
+              rdfs:subClassOf bot:Building .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#CFC_BuildingElement
+:CFC_BuildingElement rdf:type owl:Class ;
+                     rdfs:subClassOf bot:Element .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Building_Res01
+:Building_Res01 rdf:type owl:NamedIndividual ,
+                         :CFC_Building ;
+                :hasAddress :address1 ;
+                :hasGeoCoordinates :Location1 ;
+                bot:containsElement :Element_1_1 ,
+                                    :Element_1_2 ;
+                dicm:hasMaterial :Glass_A1 ,
+                                 :Steel_A1 ;
+                :hasBuildingID 1 ;
+                :hasConstructionDate "1951-01-01"^^xsd:date ,
+                :hasDemolitionDate "2024-01-01"^^xsd:date ;
+                :isPublic "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Building_Res04
+:Building_Res04 rdf:type owl:NamedIndividual ,
+                         :CFC_Building ;
+                :hasAddress :address4 ;
+                :hasGeoCoordinates :Location4 ;
+                bot:containsElement :Element_4_1 ,
+                                    :Element_4_2 ;
+                dicm:hasMaterial :Steel_A1 ,
+                                 :Steel_A2 ;
+                :hasBuildingID 4 ;
+                :hasConstructionDate "1901-01-01"^^xsd:date ;
+                :hasDemolitionDate "2030-01-01"^^xsd:date ;
+                :isPublic "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Building_com05
+:Building_com05 rdf:type owl:NamedIndividual ,
+                         :CFC_Building ;
+                :hasAddress :address5 ;
+                :hasGeoCoordinates :Location5 ;
+                bot:containsElement :Element_5_1 ,
+                                    :Element_5_2 ;
+                dicm:hasMaterial :Glass_A2 ;
+                :hasBuildingID 5 ;
+                :hasConstructionDate "1931-01-01"^^xsd:date ;
+                :hasDemolitionDate "2025-01-01"^^xsd:date ;
+                :isPublic "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Building_off2
+:Building_off2 rdf:type owl:NamedIndividual ,
+                        :CFC_Building ;
+               :hasAddress :address2 ;
+               :hasGeoCoordinates :Location2 ;
+               bot:containsElement :Element_2_1 ,
+                                   :Element_2_2 ;
+               dicm:hasMaterial :Glass_A1 ,
+                                :Steel_A1 ;
+               :hasBuildingID 2 ;
+               :hasConstructionDate "1977-01-01"^^xsd:date ;
+               :hasDemolitionDate "2035-01-01"^^xsd:date ;
+               :isPublic "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Building_res03
+:Building_res03 rdf:type owl:NamedIndividual ,
+                         :CFC_Building ;
+                :hasAddress :address3 ;
+                :hasGeoCoordinates :Location3 ;
+                bot:containsElement :Element_3_1 ,
+                                    :Element_3_2 ;
+                dicm:hasMaterial :Steel_A1 ,
+                                 dicm:Steel ;
+                :hasBuildingID 3 ;
+                :hasConstructionDate "2001-01-01"^^xsd:date ;
+                :hasDemolitionDate "2071-01-01"^^xsd:date ;
+                :isPublic "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_1_1
+:Element_1_1 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Steel_A1 ;
+             omg:hasGeometry :geometry1 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_1_2
+:Element_1_2 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Glass_A1 ;
+             omg:hasGeometry :geometry2 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_2_1
+:Element_2_1 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Steel_A1 ;
+             omg:hasGeometry :geometry3 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_2_2
+:Element_2_2 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Glass_A1 ;
+             omg:hasGeometry :geometry4 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_3_1
+:Element_3_1 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial dicm:Steel ;
+             omg:hasGeometry :geometry5 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_3_2
+:Element_3_2 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Steel_A1 ;
+             omg:hasGeometry :geometry6 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_4_1
+:Element_4_1 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Steel_A2 ;
+             omg:hasGeometry :geometry7 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_4_2
+:Element_4_2 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Steel_A1 ;
+             omg:hasGeometry :geometry8 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_5_1
+:Element_5_1 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Glass_A2 ;
+             omg:hasGeometry :geometry9 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Element_5_2
+:Element_5_2 rdf:type owl:NamedIndividual ,
+                      :CFC_BuildingElement ;
+             dicm:hasMaterial :Glass_A2 ;
+             omg:hasGeometry :geometry10 ;
+             :isPublic "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Glass_A1
+:Glass_A1 rdf:type owl:NamedIndividual ,
+                   dicm:Material .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Glass_A2
+:Glass_A2 rdf:type owl:NamedIndividual ,
+                   dicm:Material .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Location1
+:Location1 rdf:type owl:NamedIndividual ,
+                    schema:GeoCoordinates ;
+           schema:latitude "47.4101"^^xsd:float ;
+           schema:longitude "8.524847"^^xsd:float .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Location2
+:Location2 rdf:type owl:NamedIndividual ,
+                    schema:GeoCoordinates ;
+           schema:latitude "47.409626"^^xsd:float ;
+           schema:longitude "8.506312"^^xsd:float .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Location3
+:Location3 rdf:type owl:NamedIndividual ,
+                    schema:GeoCoordinates ;
+           schema:latitude "47.40393"^^xsd:float ;
+           schema:longitude "8.495792"^^xsd:float .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Location4
+:Location4 rdf:type owl:NamedIndividual ,
+                    schema:GeoCoordinates ;
+           schema:latitude "47.361385"^^xsd:float ;
+           schema:longitude "8.570687"^^xsd:float .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Location5
+:Location5 rdf:type owl:NamedIndividual ,
+                    schema:GeoCoordinates ;
+           schema:latitude "47.37987"^^xsd:float ;
+           schema:longitude "8.513854"^^xsd:float .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Steel_A1
+:Steel_A1 rdf:type owl:NamedIndividual ,
+                   dicm:Material .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#Steel_A2
+:Steel_A2 rdf:type owl:NamedIndividual ,
+                   dicm:Material .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#address1
+:address1 rdf:type owl:NamedIndividual ,
+                   schema:PostalAddress ;
+          schema:streetAddress "Käferholzstrasse 244, 8046, Zürich"^^xsd:string .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#address2
+:address2 rdf:type owl:NamedIndividual ,
+                   schema:PostalAddress ;
+          schema:streetAddress "Stefano-Franscini-Platz 5 8049 Zurich"^^xsd:string .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#address3
+:address3 rdf:type owl:NamedIndividual ,
+                   schema:PostalAddress ;
+          schema:streetAddress "Regensdorferstrasse 25, 8049, Zürich"^^xsd:string .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#address4
+:address4 rdf:type owl:NamedIndividual ,
+                   schema:PostalAddress ;
+          schema:streetAddress "Witikonerstrasse 77, 8032, Zürich"^^xsd:string .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#address5
+:address5 rdf:type owl:NamedIndividual ,
+                   schema:PostalAddress ;
+          schema:streetAddress "Bullingerstrasse 17, 8004, Zürich"^^xsd:string .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry1
+:geometry1 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry10
+:geometry10 rdf:type owl:NamedIndividual ,
+                     omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry2
+:geometry2 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry3
+:geometry3 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry4
+:geometry4 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry5
+:geometry5 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry6
+:geometry6 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry7
+:geometry7 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry8
+:geometry8 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#geometry9
+:geometry9 rdf:type owl:NamedIndividual ,
+                    omg:Geometry .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+
+
+###
+# # PREFIX owl: <http://www.w3.org/2002/07/owl#>
+# # PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+# # PREFIX : <http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#>
+
+# # SELECT ?sub ?element WHERE {
+# #   ?sub rdf:type :CFC_Building .
+# # } LIMIT 10
+
+###
+# SELECT *
+# WHERE {
+#     ?sub rdf:type :CFC_Building .
+#   	?sub :hasBuildingID 1.
+#   	?sub ?p ?o .
+#     filter ( ?p not in ( rdf:type ) )
+# }
+
+###
+# PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# PREFIX owl: <http://www.w3.org/2002/07/owl#>
+# PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+# PREFIX : <http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#>
+# PREFIX schema: <http://schema.org/>
+
+#  SELECT ?sub ?address ?condate ?demodate ?lat ?long
+#  WHERE {
+#     ?sub rdf:type :CFC_Building .
+#   	?sub :hasBuildingID 2.
+#     ?sub :hasAddress ?addr .
+#     ?addr schema:streetAddress ?address .
+#     ?sub :hasConstructionDate ?condate .
+#     ?sub :hasGeoCoordinates ?loc .
+#     ?loc schema:latitude ?lat .
+#     ?loc schema:longitude ?long .
+# }
