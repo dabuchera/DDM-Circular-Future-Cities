@@ -125,10 +125,10 @@ export const initiateConnectionSubscribeBlocks = async (
   const client = await connectWebSocketClient(websocketUrl)
   client.subscribeBlocks(async (blockInfo: Block) => {
     const account = await getBalance(address)
-    console.log('initiateConnectionSubscribeBlocks', appState.tx_status)
+    // console.log('initiateConnectionSubscribeBlocks', appState.tx_status)
 
-    const audio = new Audio('https://polybox.ethz.ch/index.php/s/ZwvTo52VUlup82S/download')
-    audio.play()
+    // const audio = new Audio('https://polybox.ethz.ch/index.php/s/ZwvTo52VUlup82S/download')
+    // audio.play()
 
     if (appState.tx_status === 'success') {
       setAppstate((prevState) => ({

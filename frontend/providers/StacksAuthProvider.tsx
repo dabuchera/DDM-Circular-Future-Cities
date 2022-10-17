@@ -1,10 +1,12 @@
 import { AppConfig, UserData, UserSession } from '@stacks/connect'
 import { StacksNetwork, StacksTestnet, StacksMocknet } from '@stacks/network'
+import { Storage } from '@stacks/storage'
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from 'react'
 
 interface IStacksAuthContextValue {
   network: StacksNetwork
   address?: string
+  storage: Storage
   userSession: UserSession
   userData: UserData | undefined
   setUserData: Dispatch<SetStateAction<UserData | undefined>>
@@ -23,6 +25,8 @@ export default function StacksProvider({ children }: PropsWithChildren<{}>) {
   const userSession = new UserSession({ appConfig })
   const address: string | undefined = userData?.profile?.stxAddress?.testnet
 
+  const storage = new Storage({ userSession })
+
   useEffect(() => {
     if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn().then((userData) => {
@@ -34,7 +38,7 @@ export default function StacksProvider({ children }: PropsWithChildren<{}>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const value: IStacksAuthContextValue = { network, address, userSession, userData, setUserData }
+  const value: IStacksAuthContextValue = { network, address, storage, userSession, userData, setUserData }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

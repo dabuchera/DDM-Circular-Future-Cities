@@ -5,39 +5,60 @@ import { IconButton, StandardButton } from '../components/Buttons'
 import MapboxMap from '../components/mapbox-map'
 import PageHeading from '../components/PageHeading'
 import InfoPanel from '../components/InfoPanel'
-import { useMarkersContext } from '../providers/MarkersProvider'
 import QueryPanel from '../components/QueryPanel'
 import { fetchTest, IAssets } from '../lib/fetchKG'
 import SubmitPanel from '../components/SubmitPanel'
+import { useAuthContext } from '../providers/StacksAuthProvider'
 
 interface Markers extends Marker {
   id: number
   element: HTMLElement
 }
 
+// https://stackoverflow.com/questions/48566471/sparql-querying-data-linked-between-two-separate-graphs
+
 export default function Map() {
+  const { storage } = useAuthContext()
+
   //   const [loading, setLoading] = useState(true)
   const [map, setMap] = useState<mapboxgl.Map>()
   const [markers, setMarkers] = useState<Markers[]>()
   //   const handleMapLoading = () => setLoading(false)
-  // const { markers } = useMarkersContext()
 
   const [assets, setAssets] = useState<IAssets[]>()
   const [selectedAsset, setSelectedAsset] = useState<IAssets>()
 
   const [visibilityInfoPanel, setVisibilityInfoPanel] = useState(false)
   const [visibilityQueryPanel, setVisibilityQueryPanel] = useState(true)
-  const [visibilitySubmitPanel, setVisibilitySubmitPanel] = useState(true)
+  const [visibilitySubmitPanel, setVisibilitySubmitPanel] = useState(false)
 
   useEffect(() => {
-    // Optimze here -> From one marker directly to another
-    if (markers && selectedAsset && visibilityInfoPanel) {
+    console.log('change of selectedAsset')
+    console.log(selectedAsset)
+    markers?.forEach((marker) => {
+      marker.element.querySelectorAll('path')[0].setAttribute('fill', '#3B82F6')
+    })
+    if (selectedAsset && markers) {
       const marker = markers[selectedAsset.id - 1]
       marker.element.querySelectorAll('path')[0].setAttribute('fill', '#FF0000')
-    } else if (markers && selectedAsset && !visibilityInfoPanel) {
-      const marker = markers[selectedAsset.id - 1]
-      marker.element.querySelectorAll('path')[0].setAttribute('fill', '#3B82F6')
     }
+  }, [selectedAsset])
+
+  useEffect(() => {
+    console.log('change of visibilityInfoPanel')
+    console.log(visibilityInfoPanel)
+    if (!visibilityInfoPanel) {
+      setVisibilityInfoPanel(false)
+      setSelectedAsset(undefined)
+      map?.fire('closeAllPopups')
+    }
+    // markers?.forEach((marker) => {
+    //   marker.element.querySelectorAll('path')[0].setAttribute('fill', '#3B82F6')
+    // })
+    // if (selectedAsset && markers) {
+    //   const marker = markers[selectedAsset.id - 1]
+    //   marker.element.querySelectorAll('path')[0].setAttribute('fill', '#FF0000')
+    // }
   }, [visibilityInfoPanel])
 
   // fetch all Markers from somewhere
@@ -46,7 +67,10 @@ export default function Map() {
     console.log('useEffect Map.tsx')
     if (map) {
       fetchTest().then((assetsReturn) => {
-        console.log(assetsReturn)
+        console.log(assetsReturn.length)
+        assetsReturn = assetsReturn.sort((a, b) => {
+          return a.id - b.id
+        })
         setAssets(assetsReturn)
         const tempMarkers: Markers[] = []
         assetsReturn.forEach((assetsReturnItem) => {
@@ -65,6 +89,10 @@ export default function Map() {
           )
           marker.setPopup(popup)
           marker.addTo(map)
+          // Add a custom event listener to the map
+          map.on('closeAllPopups', () => {
+            popup.remove()
+          })
 
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore Function cannot be used in the Spread Operator
@@ -99,16 +127,17 @@ export default function Map() {
     if (e.target.className === 'mapboxgl-canvas') {
       if (visibilityInfoPanel) {
         setVisibilityInfoPanel(false)
+        setSelectedAsset(undefined)
       }
     }
   }
 
   const home = () => {
-    map?.flyTo({ center: [8.542306, 47.37331], zoom: 14, pitch: 45, bearing: -17.6 })
+    map?.flyTo({ center: [8.542306, 47.37331], zoom: 12.5, pitch: 45, bearing: -17.6 })
   }
 
   const test = () => {
-    console.log(markers)
+    console.log(selectedAsset)
   }
 
   return (
@@ -147,7 +176,8 @@ export default function Map() {
           <div
             id="infoPanel"
             className={`${
-              visibilityInfoPanel ? 'opacity-100 ' : 'opacity-0'
+              // visibilityInfoPanel ? 'opacity-100 ' : 'opacity-0'
+              visibilityInfoPanel ? 'visible ' : 'hidden'
             } bg-white max-w-screen-mobile border border-blue-500 rounded shadow-lg`}
           >
             <div className="absolute top-[0%] right-[0%]">
@@ -162,25 +192,14 @@ export default function Map() {
             </div>
             <InfoPanel selectedAsset={selectedAsset} />
           </div>
-          <div>
-            {assets ? (
-              <ul>
-                {assets.map((asset) => (
-                  <li key={asset.id}>{asset.id}</li>
-                ))}
-              </ul>
-            ) : (
-              <ul>fsdfsdf</ul>
-            )}
-          </div>
-          <div>03</div>
         </div>
         {/* Query Panel */}
         <div className="flex flex-col absolute top-[20%] left-[10%] z-10">
           <div
             id="queryPanel"
             className={`${
-              visibilityQueryPanel ? 'opacity-100 ' : 'opacity-0'
+              // visibilityQueryPanel ? 'opacity-100 ' : 'opacity-0'
+              visibilityQueryPanel ? 'visible' : 'hidden'
             } bg-white max-w-screen-mobile border border-blue-500 rounded shadow-lg`}
           >
             <div className="absolute top-[0%] right-[0%]">
@@ -201,7 +220,8 @@ export default function Map() {
           <div
             id="submitPanel"
             className={`${
-              visibilitySubmitPanel ? 'opacity-100 ' : 'opacity-0'
+              // visibilitySubmitPanel ? 'opacity-100 ' : 'opacity-0'
+              visibilitySubmitPanel ? 'visible ' : 'hidden'
             } bg-white max-w-screen-mobile border border-blue-500 rounded shadow-lg`}
           >
             <div className="absolute top-[0%] right-[0%]">

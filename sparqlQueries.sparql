@@ -1,0 +1,36 @@
+###
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#>
+
+SELECT ?sub ?element WHERE {
+   ?sub rdf:type :CFC_Building .
+} LIMIT 10
+
+###
+
+SELECT *
+WHERE {
+      ?sub rdf:type :CFC_Building .
+   	  ?sub :hasBuildingID 1.
+   	  ?sub ?p ?o .
+      filter ( ?p not in ( rdf:type ) )
+}
+
+###
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.semanticweb.org/rranjith/ontologies/2022/8/OntoCFC#>
+PREFIX schema: <http://schema.org/>
+SELECT ?sub ?address ?condate ?demodate ?lat ?long
+WHERE {
+      ?sub rdf:type :CFC_Building .
+   	?sub :hasBuildingID 2.
+      ?sub :hasAddress ?addr .
+      ?addr schema:streetAddress ?address .
+      ?sub :hasConstructionDate ?condate .
+      ?sub :hasGeoCoordinates ?loc .
+      ?loc schema:latitude ?lat .
+      ?loc schema:longitude ?long .
+ }

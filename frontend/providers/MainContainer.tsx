@@ -32,7 +32,7 @@ export const getBalance = async (address: string) => {
 }
 
 export default function AppMain({ Component, pageProps }: AppProps) {
-  const { userSession } = useAuthContext()
+  const { userSession, storage } = useAuthContext()
   const { appState, setAppstate } = useAppContext()
 
   // const location = useRouter().asPath
@@ -42,6 +42,7 @@ export default function AppMain({ Component, pageProps }: AppProps) {
     console.log('useEffect #1 - appState')
     setAppstate((prevState) => ({ ...prevState, currentTxId: '', currentTxStatus: '' }))
     console.log(appState)
+    console.log(storage)
     // }, [location])
   }, [])
 

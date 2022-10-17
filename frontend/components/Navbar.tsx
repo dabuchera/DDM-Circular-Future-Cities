@@ -28,7 +28,8 @@ export default function Navbar() {
       {/* <NavbarLink href="/swap">Swap</NavbarLink> */}
       {/* <NavbarLink href="/liquidity">Liquidity</NavbarLink> */}
       {/* <NavbarLink href="/stats">Stats</NavbarLink> */}
-      {/* <NavbarLink href="/admin">Admin</NavbarLink> */}
+      <NavbarLink href="/admin">Admin</NavbarLink>
+      <NavbarLink href="/user">User</NavbarLink>
       {/* <div className="flex-grow"></div> */}
       <Auth />
     </div>

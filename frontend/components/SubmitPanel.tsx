@@ -20,7 +20,8 @@ export default function SubmitPanel({ assets }: SubmitPanelProps) {
 
   let newestID = null
   if (assets) {
-    newestID = assets[assets.length - 1].id + 1
+    // console.log(assets)
+    newestID = assets.length + 1
   }
 
   // if (formElement) {

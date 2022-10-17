@@ -22,12 +22,21 @@ export default function InfoPanel({ selectedAsset }: InfoPanelProps) {
               <td className="w-1/2">{selectedAsset ? selectedAsset.id : ''}</td>
             </tr>
             <tr>
-              <td className="font-semibold w-1/2">Demolition Date</td>
-              <td className="w-1/2">{selectedAsset ? selectedAsset.demolitionDate.toDateString() : ''}</td>
+              <td className="font-semibold w-1/2">Address</td>
+              <td className="w-1/2">{selectedAsset ? selectedAsset.address : ''}</td>
             </tr>
             <tr>
-              <td className="font-semibold">NEXT</td>
-              <td>{selectedAsset ? selectedAsset.id : ''}</td>
+              <td className="font-semibold w-1/2">Geolocation</td>
+              {/* <td className="w-1/2">{selectedAsset ? selectedAsset.lngLat.toLocaleString() : ''}</td> */}
+              <td className="w-1/2"> {selectedAsset ? selectedAsset.lngLat.toLocaleString() : ''}</td>
+            </tr>
+            <tr>
+              <td className="font-semibold w-1/2">Construction Date</td>
+              <td className="w-1/2">{selectedAsset ? selectedAsset.constructionDate.toDateString() : ''}</td>
+            </tr>
+            <tr>
+              <td className="font-semibold w-1/2">Demolition Date</td>
+              <td className="w-1/2">{selectedAsset ? selectedAsset.demolitionDate.toDateString() : ''}</td>
             </tr>
           </tbody>
         </table>

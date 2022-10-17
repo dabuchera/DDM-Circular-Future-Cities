@@ -176,10 +176,10 @@ export default function AdminPage() {
           {/* Basis 1/2 */}
           <div className="mb-auto basis-1/2 mobile:p-2 tablet:p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 ">
             <h5 className="mb-2 laptop:text-2xl tablet:text-lg mobile:text-tiny font-bold tracking-tight text-gray-900">
-              Mint DAS Token
+              Balances
             </h5>
             <p className="font-normal text-gray-700 pb-4 laptop:text-base tablet:text-tiny mobile:text-xs">
-              If you are the guardian of the DAS DAO you can mint here the DAS Token.
+              Here you see....
             </p>
             <div className="flex">
               {address ? (

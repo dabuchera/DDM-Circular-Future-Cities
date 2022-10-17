@@ -25,7 +25,7 @@ export default function MapboxMap({ initialOptions = {}, children, onCreated, on
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
       style: 'mapbox://styles/mapbox/light-v10',
       center: [8.542306, 47.37331],
-      zoom: 14,
+      zoom: 12.5,
       pitch: 45,
       bearing: -17.6,
       antialias: true,
@@ -50,15 +50,15 @@ export default function MapboxMap({ initialOptions = {}, children, onCreated, on
           'source-layer': 'building',
           filter: ['==', 'extrude', 'true'],
           type: 'fill-extrusion',
-          minzoom: 15,
+          minzoom: 13,
           paint: {
             'fill-extrusion-color': '#aaa',
 
             // Use an 'interpolate' expression to
             // add a smooth transition effect to
             // the buildings as the user zooms in.
-            'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'height']],
-            'fill-extrusion-base': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'min_height']],
+            'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 13, 0, 13.05, ['get', 'height']],
+            'fill-extrusion-base': ['interpolate', ['linear'], ['zoom'], 13, 0, 13.05, ['get', 'min_height']],
             'fill-extrusion-opacity': 0.6,
           },
         },
